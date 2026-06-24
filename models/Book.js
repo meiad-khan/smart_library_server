@@ -7,40 +7,40 @@ const bookSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-
     author: {
       type: String,
       required: true,
       trim: true,
     },
-
     category: {
       type: String,
-      default: "General",
+      required: true,
+      trim: true,
     },
-
     description: {
       type: String,
       default: "",
     },
-
     imageUrl: {
       type: String,
       default: "",
     },
-
     totalCopies: {
       type: Number,
       required: true,
-      default: 1,
-      min: 0,
+      min: 1,
     },
-
     availableCopies: {
       type: Number,
       required: true,
-      default: 1,
       min: 0,
+    },
+
+    // Which user/librarian added this book
+    addedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
   },
   {
