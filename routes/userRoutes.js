@@ -43,6 +43,16 @@ router.post("/sync", async (req, res) => {
   }
 });
 
+// GET /users — Admin only: Get all users
+router.get('/', async (req, res) => {
+  try {
+    const users = await User.find({}, '-__v'); // __v বাদ দিয়ে সব field
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
 // Get one user by Firebase UID
 router.get("/:firebaseUid", async (req, res) => {
   try {
